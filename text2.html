@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.cin
+{
+display: block;
+}
+
+</style>
+</head>
+<body>
+        <p id = "p1" style="color:red;"></p>
+        <p id = "p2" style="color:red;"></p>
+        <p id = "p3" style="color:red;"></p>
+        <p id = "p4" style="color:red;"></p>
+<label>Number</label><br>
+<input type="number" maxlength="3" id="nb" onchange="fun1()"> <br>
+<label>Order</label><br>
+<div id="mcontainer">
+<div id="container">
+        
+</div>
+</div>
+<input type="submit" onclick="fun2()" id="submit2"></input>
+</body>
+
+<script>
+     
+function fun1()
+{
+    var b1 = 0;
+var b2 = 0;
+var n = document.getElementById("nb").value;
+if( (n == '') ||   n < 1    || n > 1000   )
+{
+    document.getElementById("p1").innerHTML = "Number should be between 1 and 1000";
+b1 = 1;
+}
+else
+{
+    document.getElementById("p1").innerHTML = ""; 
+}
+
+if ( b1 == 0)
+{
+  
+
+      var element = document.getElementById("container");
+    element.parentNode.removeChild(element);
+
+    var elemDiv = document.createElement('div');
+elemDiv.setAttribute("id","container");
+document.getElementById('mcontainer').appendChild(elemDiv);
+
+  var c = document.getElementById("container");
+    var i;
+    for ( i = 0; i < n ; i++) 
+    {
+        var in1 = document.createElement("INPUT");
+        in1.setAttribute("id",i);
+        in1.setAttribute("maxlength",9);
+        in1.setAttribute("class","cin");
+        c.insertBefore(in1, c.firstChild);
+    }
+
+}         
+}
+
+function fun2()
+{
+    var n = document.getElementById("nb").value;
+    var arr = [];
+    var ttime = [];
+var v;
+
+var b1 = 0;
+var b2 = 0;
+
+if( (n == '') ||   n < 1    || n > 1000   )
+{
+    document.getElementById("p1").innerHTML = "Number should be between 1 and 1000";
+b1 = 1;
+}
+else
+{
+    document.getElementById("p1").innerHTML = ""; 
+}
+
+if (b1 == 0)
+{
+
+        var j= 1;
+        for ( i = n-1; i >= 0 ; i--) 
+            { 
+            v = document.getElementById(i).value;
+            var res = v.split(" ");
+            ttime =parseInt(res[0])  + parseInt(res[1]) ;
+            arr[i] = {customer:j,tt:ttime};
+
+                    if( ttime < 1    || ttime > 1000000  )
+                    {
+                        document.getElementById("p2").innerHTML = "the t and d should be between 1 and 1000000";
+                        b2 = 1;
+                        break;
+                    }
+
+            j = j + 1; 
+
+            }
+
+    if(b2 == 0)
+    {
+        document.getElementById("p2").innerHTML = "";
+        arr.sort(function(a, b){ if(a.tt == b.tt){ return b.customer - a.customer}else{return a.tt - b.tt}});
+        var a = '' ;
+        for ( i = 0; i < n ; i++) 
+            {
+            var a = a + arr[i].customer + " ";
+            
+
+            }
+
+            alert(a);
+
+
+    }
+
+}
+
+
+}
+</script>
+
+
+</html>
